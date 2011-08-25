@@ -9,7 +9,7 @@ describe Micropost do
   
   it 'should not allow setting the user id upon create' do
     @attr[:user_id] = 1
-    micropost = Micropost.create!(@attr)
+    micropost = Micropost.new(@attr)
     micropost.user_id.should be_nil
   end
   
@@ -30,6 +30,20 @@ describe Micropost do
     it 'should have the right associated user' do
       @micropost.user_id.should == @user.id
       @micropost.user.should == @user
+    end
+  end
+  
+  describe 'validations' do
+    it 'should have a user id' do
+      Micropost.new(@attr).should_not be_valid
+    end
+    
+    it 'should require non blank content' do
+      @user.microposts.build(:content => "    ").should_not be_valid
+    end
+    
+    it 'should reject long content' do
+      @user.microposts.build(:content => "a" * 141).should_not be_valid
     end
   end
 
