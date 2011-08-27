@@ -13,7 +13,8 @@
         <%= will_paginate @microposts %>
       <% else -%>
         <span id="no_posts">
-          You don't have any posts :( ... <%= link_to root_path, "Create one!"  %>
+          <br/>
+          <strong>You don't have any posts :( ... <%= link_to "Create one!", root_path  %></strong>
         </span>
       <% end -%>
     </td>
