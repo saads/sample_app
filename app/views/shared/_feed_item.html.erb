@@ -10,7 +10,7 @@
   <% if current_user?(feed_item.user) -%>
   <td>
     <%= link_to 'delete', feed_item, :method => :delete, 
-                                      :confirmation => "You sure?", 
+                                      :confirm => "You sure?", 
                                       :title => feed_item.content %>
   </td>
   <% end -%>
