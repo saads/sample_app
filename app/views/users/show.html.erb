@@ -11,10 +11,10 @@
           <%= render @microposts %>
         </table>
         <%= will_paginate @microposts %>
-      <% else -%>
+      <% elsif current_user?(@user) -%>
         <span id="no_posts">
           <br/>
-          <strong>You don't have any posts :( ... <%= link_to "Create one!", root_path  %></strong>
+          You don't have any posts :( ... <strong><%= link_to "Create one!", root_path  %></strong>
         </span>
       <% end -%>
     </td>

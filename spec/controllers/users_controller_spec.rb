@@ -123,9 +123,17 @@ describe UsersController do
       response.should have_selector('span.content', :content => mp2.content)
     end
     
-    it 'should have the "create micropost" link when no microposts ' do
+    it 'should show the "create micropost" link when no microposts' do
+      test_sign_in(@user)
       get :show, :id => @user
       response.should have_selector("span#no_posts")
+    end
+    
+    it 'should not show the "create micropost" link when not current user' do
+      other_user = Factory(:user, :email => Factory.next(:email))
+      test_sign_in(@user)
+      get :show, :id => other_user
+      response.should_not have_selector("span#no_posts")
     end
     
     it 'should paginate microposts' do
