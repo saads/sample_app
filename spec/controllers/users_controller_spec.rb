@@ -79,6 +79,16 @@ describe UsersController do
       response.should be_success
     end
     
+    it 'should be successful for signed-in users' do
+      other_user = Factory(:user, :email => "another@example.com")
+      test_sign_in(@user)
+      get :show, :id => other_user
+      response.should be_success
+      @user.follow!(other_user)
+      get :show, :id => other_user
+      response.should be_success
+    end
+    
     it 'should find the right user' do
       get :show, :id => @user
       assigns(:user).should == @user
