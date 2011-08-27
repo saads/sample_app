@@ -11,6 +11,10 @@
           <%= render @microposts %>
         </table>
         <%= will_paginate @microposts %>
+      <% else -%>
+        <span id="no_posts">
+          You don't have any posts :( ... <%= link_to root_path, "Create one!"  %>
+        </span>
       <% end -%>
     </td>
     <td class="sidebar round">

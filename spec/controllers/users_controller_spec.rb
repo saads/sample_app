@@ -123,6 +123,11 @@ describe UsersController do
       response.should have_selector('span.content', :content => mp2.content)
     end
     
+    it 'should have the "create micropost" link when no microposts ' do
+      get :show, :id => @user
+      response.should have_selector("span#no_posts")
+    end
+    
     it 'should paginate microposts' do
       35.times {Factory(:micropost, :user => @user, :content => "foo")}
       get :show, :id => @user
